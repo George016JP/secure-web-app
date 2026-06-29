@@ -30,3 +30,9 @@ jobs:
       - name: Run Python application
         run: |
           python app.py
+
+      # Step 5: Security Scan (SAST) using Semgrep
+      - name: Run Semgrep SAST Scan
+        run: |
+          pip install semgrep
+          semgrep scan --config=auto

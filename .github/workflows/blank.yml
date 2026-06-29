@@ -8,6 +8,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # ─── ADD THESE LINES TO FIX THE 403 ERROR ───
+    permissions:
+      contents: read
+      issues: write
+    # ─────────────────────────────────────────────
 
     steps:
       # Step 1: Download repository
@@ -59,6 +65,6 @@ jobs:
       - name: Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
-          target: 'https://www.example.com' # The target web application URL to test
+          target: 'https://www.example.com'
           token: ${{ secrets.GITHUB_TOKEN }}
-          fail_action: false # Keeps the pipeline green even if web vulnerabilities are found
+          fail_action: false

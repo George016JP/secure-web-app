@@ -49,8 +49,16 @@ jobs:
       - name: Run Trivy Vulnerability Scan
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs' # Scan the filesystem
+          scan-type: 'fs'
           scan-ref: '.'
           format: 'table'
-          exit-code: '1' # Fail the pipeline if severe vulnerabilities are found
+          exit-code: '1'
           severity: 'CRITICAL,HIGH'
+
+      # Step 8: Dynamic Application Security Testing (DAST) using OWASP ZAP
+      - name: Run OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: 'https://www.example.com' # The target web application URL to test
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_action: false # Keeps the pipeline green even if web vulnerabilities are found

@@ -13,6 +13,8 @@ jobs:
       # Step 1: Download repository
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Gitleaks needs full history to scan past commits
 
       # Step 2: Install Python
       - name: Set up Python
@@ -36,3 +38,9 @@ jobs:
         run: |
           pip install semgrep
           semgrep scan --config=auto
+
+      # Step 6: Secret Scanning using Gitleaks
+      - name: Run Gitleaks Secret Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

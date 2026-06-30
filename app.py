@@ -1,14 +1,8 @@
-import os
-
-# ❌ VULNERABILITY 1: Hardcoded sensitive AWS API Key (Gitleaks should catch this)
-AWS_SECRET_KEY = "AKIAIMNOF7ER8STEFAKEKEY" 
+# This is a standard, completely safe EICAR test string to check security scanners.
+MALWARE_TEST_STRING = "X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*"
 
 def greet():
     return "Hello, Secure CI/CD!"
-
-# ❌ VULNERABILITY 2: Using eval() on user input (Semgrep should catch this)
-def dangerous_execution(user_input):
-    return eval(user_input) 
 
 if __name__ == "__main__":
     print(greet())
